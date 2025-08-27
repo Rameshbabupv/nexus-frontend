@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import {
   Box,
   Paper,
@@ -256,11 +256,56 @@ const CompanyMasterContent: React.FC = () => {
   );
 };
 
-// Main component with provider
+// Main component with provider and loading state
 const ReactContextVersion: React.FC = () => {
+  const [moduleStatus, setModuleStatus] = useState<'loading' | 'ready' | 'error'>('loading')
+  const [timestamp, setTimestamp] = useState<string>('')
+
+  useEffect(() => {
+    // Simulate module initialization (matching Employee module pattern)
+    const timer = setTimeout(() => {
+      setTimestamp(new Date().toLocaleString())
+      setModuleStatus('ready')
+    }, 1200) // Slightly longer than Employee module for variety
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (moduleStatus === 'loading') {
+    return (
+      <Container maxWidth="xl" sx={{ py: 2 }}>
+        <div className="p-8 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-200">
+          <div className="flex items-center space-x-3 mb-4">
+            <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            <h1 className="text-2xl font-bold text-blue-800">Masters Module Loading...</h1>
+          </div>
+          <p className="text-blue-700">Initializing Company Master micro-frontend...</p>
+          <div className="mt-4 bg-white p-3 rounded border border-blue-200">
+            <div className="flex items-center space-x-2 text-sm">
+              <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+              <span className="text-blue-600">Loading React Context API state management</span>
+            </div>
+            <div className="flex items-center space-x-2 text-sm mt-1">
+              <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+              <span className="text-green-600">Configuring Material-UI theme integration</span>
+            </div>
+            <div className="flex items-center space-x-2 text-sm mt-1">
+              <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
+              <span className="text-purple-600">Preparing Company Master interface</span>
+            </div>
+          </div>
+        </div>
+      </Container>
+    )
+  }
+
   return (
     <CompanyProvider>
-      <CompanyMasterContent />
+      <div>
+        {/* Optional: Add timestamp info like Employee module */}
+        <Box sx={{ display: 'none' }}>Module loaded at: {timestamp}</Box>
+        <CompanyMasterContent />
+      </div>
     </CompanyProvider>
   );
 };
