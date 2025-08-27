@@ -14,10 +14,24 @@ export default defineConfig({
       shared: {
         react: {
           singleton: true,
+          strictVersion: true,
+          requiredVersion: '18.3.1',
+          eager: true
         },
         'react-dom': {
           singleton: true,
+          strictVersion: true,
+          requiredVersion: '18.3.1',
+          eager: true
         },
+        '@mui/material': {
+          singleton: true,
+          requiredVersion: '^5.18.0'
+        },
+        '@mui/icons-material': {
+          singleton: true,
+          requiredVersion: '^5.18.0'
+        }
       },
     }),
   ],
