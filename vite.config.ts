@@ -10,6 +10,7 @@ export default defineConfig({
       name: 'shell',
       remotes: {
         employeeModule: 'http://localhost:3001/assets/remoteEntry.js',
+        mastersModule: 'http://localhost:3002/assets/remoteEntry.js',
       },
       shared: {
         react: {
