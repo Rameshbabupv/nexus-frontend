@@ -102,3 +102,6 @@ storybook-static
 # Temporary folders
 .tmp/
 .temp/
+
+# Personal Obsidian vault (private workspace)
+obsidian-vault-personal/
